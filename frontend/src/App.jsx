@@ -73,8 +73,13 @@ function App() {
   ];
 
   return (
-    <div style={{ padding: '30px', fontFamily: 'Arial, sans-serif', backgroundColor: '#f4f6f8', minHeight: '100vh' }}>
-      <h1 style={{ color: '#333', marginBottom: '15px' }}>Forge2 Kanban Board (With Tags & Due Dates)</h1>
+    <div style={{ padding: '30px', fontFamily: 'Arial, sans-serif', backgroundColor: '#f4f6f8', minHeight: '100vh', boxSizing: 'border-box' }}>
+
+      {/* Clean & Stacked Header Section to Avoid Messy Overlap */}
+      <div style={{ marginBottom: '25px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <h1 style={{ color: '#172b4d', margin: '0', fontSize: '26px', fontWeight: 'bold' }}>Forge2 Kanban Board</h1>
+        <p style={{ color: '#5e6c84', margin: '0', fontSize: '14px' }}>Manage your tasks efficiently with tags and due dates</p>
+      </div>
 
       <form onSubmit={addTask} style={{ marginBottom: '25px', display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
         <input
@@ -97,7 +102,7 @@ function App() {
           placeholder="Tag (e.g. Bug, Feature)"
           style={{ padding: '10px', width: '150px', borderRadius: '4px', border: '1px solid #ccc' }}
         />
-        <button type="submit" style={{ padding: '10px 20px', background: '#0079bf', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+        <button type="submit" style={{ padding: '10px 20px', background: '#0079bf', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
           Add Task
         </button>
       </form>
@@ -114,7 +119,7 @@ function App() {
                   return (
                     <div key={task.id} style={{ background: overdue ? '#ffebee' : '#fff', borderLeft: overdue ? '4px solid #c62828' : 'none', padding: '10px 12px', borderRadius: '6px', boxShadow: '0 1px 2px rgba(0,0,0,0.1)', color: '#172b4d', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                        <span style={{ fontWeight: 'bold' }}>{task.title}</span>
+                        <span style={{ fontWeight: 'bold', wordBreak: 'break-word', maxWidth: '180px' }}>{task.title}</span>
                         <div style={{ display: 'flex', gap: '4px' }}>
                           {colIdx > 0 && (
                             <button onClick={() => moveCard(task, columns[colIdx - 1].statusKey)} style={{ background: '#dfe1e6', border: 'none', borderRadius: '3px', cursor: 'pointer', padding: '2px 5px', fontSize: '11px' }}>◀</button>
@@ -125,7 +130,7 @@ function App() {
                           <button onClick={() => deleteCard(task.id)} style={{ background: '#ffebee', color: '#c62828', border: 'none', borderRadius: '3px', cursor: 'pointer', padding: '2px 5px', fontSize: '11px' }}>✕</button>
                         </div>
                       </div>
-                      <div style={{ display: 'flex', gap: '8px', fontSize: '12px', color: '#5e6c84' }}>
+                      <div style={{ display: 'flex', gap: '8px', fontSize: '12px', color: '#5e6c84', flexWrap: 'wrap' }}>
                         {task.tag && <span style={{ background: '#dfe1e6', padding: '2px 6px', borderRadius: '4px' }}>{task.tag}</span>}
                         {task.due_date && <span style={{ color: overdue ? '#c62828' : '#5e6c84', fontWeight: overdue ? 'bold' : 'normal' }}>Due: {task.due_date} {overdue && '(Overdue!)'}</span>}
                       </div>
