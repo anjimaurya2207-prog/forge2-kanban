@@ -1,0 +1,15 @@
+{
+    "project_name": "forge2-kanban",
+    "primary_model": "gemini-free",
+    "fallback_model": "groq-free",
+    "agents": {
+        "hermes": {
+            "role": "Planning & Memory",
+            "skill_file": "SKILL.md"
+        },
+        "openclaw": {
+            "role": "Coding & Execution",
+            "workspace": "C:\\forge2-kanban"
+        }
+    }
+}
