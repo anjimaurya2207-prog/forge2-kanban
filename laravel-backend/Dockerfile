@@ -39,4 +39,5 @@ RUN mkdir -p /var/www/html/database && \
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/database
 
 EXPOSE 8080
-CMD ["apache2-foreground"]
+
+CMD php artisan migrate --force && apache2-foreground
