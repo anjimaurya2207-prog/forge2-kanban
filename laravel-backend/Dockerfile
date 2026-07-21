@@ -28,8 +28,11 @@ RUN composer install --no-dev --optimize-autoloader
 # Configure Apache DocumentRoot to point to Laravel's public folder
 RUN sed -i -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
 
+# Configure Apache to listen on port 8080 for Render
+RUN sed -i 's/80/8080/g' /etc/apache2/ports.conf /etc/apache2/sites-available/000-default.conf
+
 # Grant permissions
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 EXPOSE 8080
-CMD apache2-foreground
+CMD ["apache2-foreground"]
